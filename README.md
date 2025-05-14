@@ -147,7 +147,7 @@ return nums[left - 1] + (k - missing(left - 1))
 
 For plain old binary search we can also use Pythons builtin `bisect` , `bisect_right` or `bisect_left`.
 
-#### Find First True in a monotonic boolean list
+### Find First True in a monotonic boolean list
 ```Python
 bools = [False, False, False, True, True]
 print(bisect_left(bools, True)) # --> 3
