@@ -177,9 +177,7 @@ print(hi - 1 if lo < hi else None) # --> 3
 
 ## Unionfind and Connected Components
 
-These are one of my favourite algorithms. It is required for LC mediums as in `Leetcode 721: Accounts Merge`.
-`Given a list of accounts where each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account. Now, we would like to merge these accounts.`
-
+These are one of my favourite algorithms. Both algos group stuff together.
 ### Connected Components
 
 Connected components returns a list of lists containing components that are literally connected.
@@ -207,7 +205,11 @@ def connected_components(neighbors):
     return ret
 ```
 
-#### Example: Solving Accounts Merge
+#### Example: Leetcode 721: Solving Accounts Merge
+` Accounts Merge`.
+`Given a list of accounts where each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, and the rest of the elements are emails representing emails of the account. Now, we would like to merge these accounts.`
+
+
 We draw an edge from a random first email to any other email to create the connected component. Then we calculate them using the algorithms.
 and finally just map them back to the name of the account holder and sort them as required by the task.
 
@@ -249,7 +251,7 @@ def union(x, y):
     parent[find(x)] = find(y)
 ```
 
-#### Example: Solving Accounts Merge
+#### Example: Leetcode 721: Solving Accounts Merge
 Instead of drawing an edge from email to email we union them by their common root.
 ```Python
 for account in accounts:
