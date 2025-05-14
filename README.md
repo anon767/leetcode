@@ -513,3 +513,68 @@ def subarraySum(nums, k):
 $O(n)$ time and $O(n)$ space complexity.
 Why is this Hashmap + PrefixSum approach working?
 PrefixSum is monotonically increasing.
+
+## Two Pointer
+
+The two-pointer technique I’m referring to here involves using two pointers that start at opposite ends of an array and gradually move towards each other before meeting in the middle.
+```
+left                            right
+ ↓                                ↓
+ --- --- --- --- --- --- --- --- ---
+| 2 | 1 | 2 | 0 | 1 | 0 | 1 | 0 | 1 |
+ --- --- --- --- --- --- --- --- ---
+ ```
+This technique should be your go-to when you see a question that involves searching for a pair (or more!) of elements in an array that meet a certain criteria.
+
+### Example: 986 Interval List Intersections
+
+You are given two lists of closed intervals, firstList and secondList, where `firstList[i] = [starti, endi]` and `secondList[j] = [startj, endj]`. Each list of intervals is pairwise disjoint and in sorted order.
+
+```Python
+ intersections = []
+if len(firstList) <= 0 or len(secondList) <= 0:
+   return intersections
+
+i, j = 0, 0
+
+while i < len(firstList) and j < len(secondList):
+   a1, a2 = firstList[i][0], firstList[i][1]
+   b1, b2 = secondList[j][0], secondList[j][1]
+   start = max(a1, b1)
+   end = min(a2, b2)
+   if start <= end:
+       intersections.append([start, end]) 
+
+   if a2 < b2:
+       i += 1
+   else:
+       j += 1
+
+```
+
+### Example: 56 Merge Intervals
+
+Given an array of `intervals` where `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+
+
+```Python
+intervals = sorted(intervals, key=lambda x: x[0])
+merged = []
+
+i = 0
+while i < len(intervals):
+   if len(merged) > 0 and merged[-1][1] >= intervals[i][0]:
+       lo = min(merged[-1][0], intervals[i][0])
+       hi = max(merged[-1][1], intervals[i][1])
+       merged[-1] = [lo, hi]
+       i += 1
+   elif i + 1 < len(intervals) and intervals[i][1] >= intervals[i+1][0]:
+       lo = min(intervals[i][0], intervals[i+1][0])
+       hi = max(intervals[i][1], intervals[i+1][1])
+       merged.append([lo, hi])
+       i += 2
+   else:
+       merged.append(intervals[i])
+       i += 1
+```
