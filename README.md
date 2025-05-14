@@ -1,13 +1,13 @@
 # Leetcode Cheatsheet 
 
 ## Sorting
-Best used for problems like interval merging
-Stick to Python builtin
+Best used for problems like interval merging. Better use Python builtin sortings
 ```python
 bla.sort()
 ```
 
-but also good to memorize one sorting algorithm just in case. Why not Quicksort
+But its also good to memorize one sorting algorithm just in case. Why not Quicksort?
+
 Runtime $O(n \log n)$ on average Worstcase $O(n^2)$
 ```Python
 def quicksort(arr):
