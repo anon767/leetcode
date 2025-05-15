@@ -578,3 +578,43 @@ while i < len(intervals):
        merged.append(intervals[i])
        i += 1
 ```
+
+## BFS
+
+Breadth First Search using a queue
+```python
+q = deque([root])
+while q:
+    cur = q.popleft()
+    ....
+    q.append(cur.next)
+```
+
+#### Kahns Algorithm
+
+Used for topological sort $O(n)$.
+E.g. LC 207 Course Schedule
+
+There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+
+```python
+in_degree = [0] * numCourses
+graph = defaultdict(list)
+
+for dest, src in prerequisites:
+   graph[src].append(dest)
+   in_degree[dest] += 1
+
+queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
+count = 0
+
+while queue:
+   course = queue.popleft()
+   count += 1
+   for neighbor in graph[course]:
+       in_degree[neighbor] -= 1
+       if in_degree[neighbor] == 0:
+           queue.append(neighbor)
+
+return count == numCourses
+```
